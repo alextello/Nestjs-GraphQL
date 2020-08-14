@@ -7,13 +7,8 @@ import { Lesson } from './lesson.entity';
 export class LessonResolver {
   constructor(private lessonService: LessonService) {}
   @Query(returns => LessonType)
-  lesson(): LessonType {
-    return {
-      id: 'sdf3fj329',
-      name: 'matematicas',
-      startDate: new Date().toISOString(),
-      endDate: new Date().toISOString(),
-    };
+  lesson(@Args('id') id: string): Promise<Lesson> {
+    return this.lessonService.getLesson(id);
   }
 
   @Mutation(returns => LessonType)
